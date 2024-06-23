@@ -2,6 +2,7 @@
 #define COMMANDS_H
 
 #include "Arduino.h"
+#include "WiFi.h"
 #include "../common/base_classes/FOCMotor.h"
 #include "../common/pid.h"
 #include "../common/lowpass_filter.h"
@@ -241,7 +242,7 @@ class Commander
     void motion(FOCMotor* motor, char* user_cmd, char* separator = (char *)" ");
 
     bool isSentinel(char ch);
-  private:
+  protected:
     // Subscribed command callback variables
     CommandCallback call_list[20];//!< array of command callback pointers - 20 is an arbitrary number
     char call_ids[20]; //!< added callback commands
@@ -297,5 +298,18 @@ class Commander
     void printError();
 };
 
+class TCPCommander: public Commander{
+  public:
+    TCPCommander(WiFiServer *ser, char eol = '\n', bool echo = false);
+
+    void run();
+    void run(WiFiClient cl, char eol);
+
+  private:
+    WiFiServer *server;
+    bool clientvalid = false;
+    WiFiClient client;
+
+};
 
 #endif
