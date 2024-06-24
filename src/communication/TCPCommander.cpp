@@ -50,3 +50,49 @@ void TCPCommander::run(WiFiClient cl, char eol){
   client = tmp; // reset the instance to the internal value
   this->eol = eol_tmp;
 }
+
+void TCPCommander::print(const int number){
+  if( !clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.print(number);
+}
+
+void TCPCommander::print(const float number){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.print((float)number,(int)decimal_places);
+}
+
+void TCPCommander::print(const char* message){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.print(message);
+}
+
+void TCPCommander::print(const __FlashStringHelper *message){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.print(message);
+}
+
+void TCPCommander::print(const char message){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.print(message);
+}
+
+void TCPCommander::println(const int number){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.println(number);
+}
+void TCPCommander::println(const float number){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.println((float)number, (int)decimal_places);
+}
+void TCPCommander::println(const char* message){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.println(message);
+}
+void TCPCommander::println(const __FlashStringHelper *message){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.println(message);
+}
+void TCPCommander::println(const char message){
+  if(!clientvalid || !client.connected() || verbose == VerboseMode::nothing ) return;
+  client.println(message);
+}

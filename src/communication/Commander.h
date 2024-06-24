@@ -271,6 +271,40 @@ class Commander
      *  @param newline - if needs lewline (1) otherwise (0)
      */
 
+    virtual void print(const float number);
+    virtual void print(const int number);
+    virtual void print(const char* message);
+    virtual void print(const __FlashStringHelper *message);
+    virtual void print(const char message);
+    virtual void println(const float number);
+    virtual void println(const int number);
+    virtual void println(const char* message);
+    virtual void println(const __FlashStringHelper *message);
+    virtual void println(const char message);
+
+    void printMachineReadable(const float number);
+    void printMachineReadable(const int number);
+    void printMachineReadable(const char* message);
+    void printMachineReadable(const __FlashStringHelper *message);
+    void printMachineReadable(const char message);
+
+    void printlnMachineReadable(const float number);
+    void printlnMachineReadable(const int number);
+    void printlnMachineReadable(const char* message);
+    void printlnMachineReadable(const __FlashStringHelper *message);
+    void printlnMachineReadable(const char message);
+
+
+    void printError();
+};
+
+class TCPCommander: public Commander{
+  public:
+    TCPCommander(WiFiServer *ser, char eol = '\n', bool echo = false);
+
+    void run();
+    void run(WiFiClient cl, char eol);
+
     void print(const float number);
     void print(const int number);
     void print(const char* message);
@@ -296,14 +330,6 @@ class Commander
 
 
     void printError();
-};
-
-class TCPCommander: public Commander{
-  public:
-    TCPCommander(WiFiServer *ser, char eol = '\n', bool echo = false);
-
-    void run();
-    void run(WiFiClient cl, char eol);
 
   private:
     WiFiServer *server;
